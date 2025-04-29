@@ -15,6 +15,19 @@ import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
+// import { Schema } from 'electron-store';
+
+const Store = require('electron-store').default;
+const storeData = new Store<any>();
+
+ipcMain.handle('loadTodoList', async (event, data) => {
+  return storeData.get('todoList');
+});
+
+ipcMain.handle('storeTodoList', async (event, data) => {
+  storeData.set('todoList', data);
+});
+
 class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
