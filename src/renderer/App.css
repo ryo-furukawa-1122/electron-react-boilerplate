@@ -62,6 +62,21 @@ body {
   margin: 40px auto;
 }
 
+.todo-item {
+  transition: all 0.2s ease;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #fff1;
+  margin-bottom: 8px;
+  list-style: none;
+}
+
+.todo-item.dragging {
+  background-color: #f0f8ff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: rotate(1deg);
+}
+
 .todo-list li {
   line-height: 2;
 }

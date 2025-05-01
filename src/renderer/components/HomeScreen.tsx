@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import TodoContent, { loadTodoList, storeTodoList } from './TodoContent';
 import { Todo } from '../types/types';
+import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 
 const HomeScreen = () => {
   // Define the state
@@ -66,6 +67,20 @@ const HomeScreen = () => {
     storeTodoList(newTodoList);
   };
 
+  // Function to reorder the tasks
+  const onDragEnd = (result: DropResult) => {
+    const { source, destination } = result;
+    
+    if (!destination) return;
+
+    const newList = Array.from(todoList);
+    const [movedItem] = newList.splice(source.index, 1);
+    newList.splice(destination.index, 0, movedItem);
+
+    setTodoList(newList);
+    storeTodoList(newList);
+  }
+
   return (
     <div className='container'>
       <div className="input-field">
@@ -79,12 +94,31 @@ const HomeScreen = () => {
           Add
         </button>
       </div>
-
-      <ul className="todo-list">
+      
+      {/* <ul className="todo-list">
         {todoList?.map((todo) => {
           return <TodoContent key={todo.id} todo={todo} onCheck={onCheck} />;
         })}
-      </ul>
+      </ul> */}
+
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="todoList">
+          {(provided) => (
+            <ul className="todo-list" {...provided.droppableProps} ref={provided.innerRef}>
+              {todoList.map((todo, index) => (
+                <Draggable key={todo.id.toString()} draggableId={todo.id.toString()} index={index}>
+                  {(provided, snapshot) => (
+                    <li ref={provided.innerRef} {...provided.draggableProps}  {...provided.dragHandleProps} className={`todo-item ${snapshot.isDragging ? 'draging' : ''}`}>
+                      <TodoContent todo={todo} onCheck={onCheck} />
+                    </li>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </ul>
+          )}
+        </Droppable>
+      </DragDropContext>
     </div>
   );
 };
