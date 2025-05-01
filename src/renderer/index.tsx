@@ -1,7 +1,8 @@
 import { createRoot } from 'react-dom/client';
 import App from './App';
 
-const container = document.getElementById('root') as HTMLElement;
+const container = document.getElementById('root') as HTMLElement;  // This is the original on Electron React Boilerplate
+// const container = document.getElementById('root')!;  // According to the issue forum (Cannot read properties of undefined (reading 'ipcRenderer'))
 const root = createRoot(container);
 root.render(<App />);
 

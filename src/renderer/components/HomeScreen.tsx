@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import TodoContent from './TodoContent';
+import TodoContent, { loadTodoList, storeTodoList } from './TodoContent';
 import { Todo } from '../types/types';
 
 const HomeScreen = () => {
@@ -9,25 +9,33 @@ const HomeScreen = () => {
 
   useEffect(() => {
     // Set the initial data
-    const defaultTodoList: Todo[] = [
-      // {
-      //   id: 1,
-      //   title: 'Write the paper',
-      //   completed: true,
-      // },
-      // {
-      //   id: 2,
-      //   title: 'Make the cover letter',
-      //   completed: false,
-      // },
-      // {
-      //   id: 3,
-      //   title: 'Submit the paper',
-      //   completed: false,
-      // },
-    ];
+    // const defaultTodoList: Todo[] = [
+    //   {
+    //     id: 1,
+    //     title: 'Write the paper',
+    //     completed: true,
+    //   },
+    //   {
+    //     id: 2,
+    //     title: 'Make the cover letter',
+    //     completed: false,
+    //   },
+    //   {
+    //     id: 3,
+    //     title: 'Submit the paper',
+    //     completed: false,
+    //   },
+    // ];
 
-    setTodoList(defaultTodoList);
+    // setTodoList(defaultTodoList);
+
+    // Load the todo list from the database
+    loadTodoList().then((todoList) => {
+      if (todoList) {
+        setTodoList(todoList);
+      }
+    })
+
   }, []);
 
   // Function to add a new task
@@ -42,6 +50,7 @@ const HomeScreen = () => {
         ...todoList,
       ];
       setTodoList(newTodoList);
+      storeTodoList(newTodoList);
 
       // Clear the input field
       setTitle('');
@@ -54,6 +63,7 @@ const HomeScreen = () => {
       return todo.id == newTodo.id ? { ...newTodo, completed: !newTodo.completed } : todo;
     });
     setTodoList(newTodoList);
+    storeTodoList(newTodoList);
   };
 
   return (
