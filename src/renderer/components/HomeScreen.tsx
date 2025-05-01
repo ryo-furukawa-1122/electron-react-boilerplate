@@ -90,28 +90,12 @@ const HomeScreen = () => {
 
   return (
     <div className='container'>
-      <div className="input-field">
-        <input
-          type='text'
-          placeholder='Add a new task'
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              onAdd();
-            }
-          }}
-        />
-        <button onClick={onAdd} className='add-todo-button'>
-          Add
-        </button>
-      </div>
       
       {/* <ul className="todo-list">
         {todoList?.map((todo) => {
           return <TodoContent key={todo.id} todo={todo} onCheck={onCheck} />;
-        })}
-      </ul> */}
+          })}
+          </ul> */}
 
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="todoList">
@@ -131,6 +115,22 @@ const HomeScreen = () => {
           )}
         </Droppable>
       </DragDropContext>
+      <div className="input-field">
+        <input
+          type='text'
+          placeholder='Add a new task'
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              onAdd();
+            }
+          }}
+        />
+        <button onClick={onAdd} className='add-todo-button'>
+          Add
+        </button>
+      </div>
     </div>
   );
 };

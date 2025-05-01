@@ -2,11 +2,16 @@ body {
   position: relative;
   color: white;
   height: 100vh;
-  background: linear-gradient(
+  /* background: linear-gradient(
     200.96deg,
     #fedc2a -29.09%,
     #dd5789 51.77%,
     #7a2c9e 129.35%
+  ); */
+  background: linear-gradient(
+    0deg,
+    #7873f5 0%,
+    #ec77ab 100%
   );
   font-family: sans-serif;
   overflow-y: hidden;
@@ -14,24 +19,27 @@ body {
 }
 
 .add-todo-button {
-  background-color: #da568a;
-  color: white;
-  border: none;
+  /* background-color: #da568a; */
+  background-color: #ec77ab;
+  color: #fff;
+  /* border: none;ß */
   padding: 8px;
   border-radius: 4px;
   appearance: none;
   font-size: 24px;
   transition: all ease-in 0.1s;
   cursor: pointer;
-  opacity: 0.9;
+  /* opacity: 0.9; */
   line-height: 1;
   min-width: 64px;
+  border: solid 2px #ec77ab;
 }
 
 .add-todo-button:hover {
-  background-color: #e47474;
-  opacity: 1;
-  transform: scale(1.05);
+  background-color: #fff;
+  color: #ec77ab;
+  /* opacity: 1; */
+  /* transform: scale(1.05); */
   transition-duration: 0.1s;
 }
 
@@ -39,7 +47,8 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
-  opacity: 0.95;
+  /* opacity: 0.95; */
+  margin-bottom: 2rem;
 }
 
 .input-field input {
@@ -56,10 +65,11 @@ body {
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   max-width: 400px;
-  margin: 40px auto;
+  margin: auto;
+  height: 100vh;
 }
 
 .todo-item {
