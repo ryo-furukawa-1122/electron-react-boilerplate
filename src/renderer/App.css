@@ -77,6 +77,12 @@ body {
   transform: rotate(1deg);
 }
 
+.todo-item > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .todo-list li {
   line-height: 2;
 }
@@ -116,4 +122,11 @@ a:hover {
 .checked {
   text-decoration: line-through;
   opacity: 0.5;
+}
+
+.delete-button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 24px;
 }

@@ -1,4 +1,5 @@
 import { Todo } from "../types/types";
+import { MdDeleteOutline } from "react-icons/md";
 
 interface ElectronWindow extends Window {
     db: {
@@ -19,10 +20,13 @@ export const storeTodoList = async (todoList: Array<Todo>): Promise<void> => {
     await window.db.storeTodoList(todoList);
 }
 
-const TodoContent = (props: { todo: Todo; onCheck: Function }) => {
-    const { todo, onCheck } = props;
+const TodoContent = (props: { todo: Todo; onCheck: Function; onDelete: Function }) => {
+    const { todo, onCheck, onDelete } = props;
     const onCheckHandler = () => {
         onCheck(todo);
+    }
+    const onDeleteHandler = () => {
+        onDelete(todo);
     }
     return (
         <li className={todo.completed ? 'checked' : ''}>
@@ -34,6 +38,13 @@ const TodoContent = (props: { todo: Todo; onCheck: Function }) => {
                 ></input>
                 <span>{todo.title}</span>
             </label>
+            <button
+                onClick={onDeleteHandler}
+                className='delete-button'
+                aria-label='delete task'
+            >
+                <MdDeleteOutline color="#ffffff" />
+            </button>
         </li>
     );
 };

@@ -81,6 +81,13 @@ const HomeScreen = () => {
     storeTodoList(newList);
   }
 
+  // Function to delete a task
+  const onDelete = (target: Todo) => {
+    const newTodoList = todoList.filter((todo) => todo.id !== target.id);
+    setTodoList(newTodoList);
+    storeTodoList(newTodoList);
+  }
+
   return (
     <div className='container'>
       <div className="input-field">
@@ -109,7 +116,7 @@ const HomeScreen = () => {
                 <Draggable key={todo.id.toString()} draggableId={todo.id.toString()} index={index}>
                   {(provided, snapshot) => (
                     <li ref={provided.innerRef} {...provided.draggableProps}  {...provided.dragHandleProps} className={`todo-item ${snapshot.isDragging ? 'draging' : ''}`}>
-                      <TodoContent todo={todo} onCheck={onCheck} />
+                      <TodoContent todo={todo} onCheck={onCheck} onDelete={onDelete} />
                     </li>
                   )}
                 </Draggable>
