@@ -96,6 +96,11 @@ const HomeScreen = () => {
           placeholder='Add a new task'
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              onAdd();
+            }
+          }}
         />
         <button onClick={onAdd} className='add-todo-button'>
           Add
