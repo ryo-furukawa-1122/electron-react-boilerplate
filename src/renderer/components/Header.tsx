@@ -5,9 +5,18 @@ import { FaGithub } from "react-icons/fa";
 
 const Header = () => {
     const [open, setOpen] = useState(false);
+    const [showDrawer, setShowDrawer] = useState(false);
     
     const toggleDrawer = () => {
-        setOpen(!open);
+        if (open) {
+            setOpen(false);
+            setTimeout(() => {
+                setShowDrawer(false);
+            }, 200);
+        } else {
+            setShowDrawer(true);
+            setTimeout(() => setOpen(true), 0);
+        }
     };
 
     return (
@@ -35,9 +44,9 @@ const Header = () => {
                 </div>
             </header>
 
-            {open && (
+            {showDrawer && (
                 <>
-                    <div className="overlay" onClick={toggleDrawer}></div>
+                    <div className={`overlay ${open ? 'open' : ''}`} onClick={toggleDrawer}></div>
                     
                     <div className={`drawer ${open ? 'open' : ''}`}>
                         <button onClick={toggleDrawer} className="drawer-close">
