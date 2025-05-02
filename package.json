@@ -43,14 +43,15 @@
     "postinstall": "ts-node .erb/scripts/check-native-dep.js && electron-builder install-app-deps && npm run build:dll",
     "lint": "cross-env NODE_ENV=development eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "cross-env NODE_ENV=development eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "package": "ts-node ./.erb/scripts/clean.js dist && npm run build && electron-builder build --publish never && npm run build:dll",
+    "package": "electron-forge package",
     "rebuild": "electron-rebuild --parallel --types prod,dev,optional --module-dir release/app",
     "prestart": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true NODE_OPTIONS=\"-r ts-node/register --no-warnings\" webpack --config ./.erb/configs/webpack.config.main.dev.ts",
-    "start": "ts-node ./.erb/scripts/check-port-in-use.js && npm run prestart && npm run start:renderer",
+    "start": "electron-forge start",
     "start:main": "concurrently -k \"cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true webpack --watch --config ./.erb/configs/webpack.config.main.dev.ts\" \"electronmon .\"",
     "start:preload": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true NODE_OPTIONS=\"-r ts-node/register --no-warnings\" webpack --config ./.erb/configs/webpack.config.preload.dev.ts",
     "start:renderer": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true NODE_OPTIONS=\"-r ts-node/register --no-warnings\" webpack serve --config ./.erb/configs/webpack.config.renderer.dev.ts",
-    "test": "jest"
+    "test": "jest",
+    "make": "electron-forge make"
   },
   "browserslist": [
     "extends browserslist-config-erb"
@@ -106,6 +107,7 @@
     "@hello-pangea/dnd": "^18.0.1",
     "electron-debug": "^4.1.0",
     "electron-log": "^5.3.2",
+    "electron-squirrel-startup": "^1.0.1",
     "electron-store": "^10.0.1",
     "electron-updater": "^6.3.9",
     "react": "^19.0.0",
@@ -114,7 +116,14 @@
     "react-router-dom": "^7.3.0"
   },
   "devDependencies": {
-    "@electron/packager": "^18.3.6",
+    "@electron-forge/cli": "^7.8.0",
+    "@electron-forge/maker-deb": "^7.8.0",
+    "@electron-forge/maker-rpm": "^7.8.0",
+    "@electron-forge/maker-squirrel": "^7.8.0",
+    "@electron-forge/maker-zip": "^7.8.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.8.0",
+    "@electron-forge/plugin-fuses": "^7.8.0",
+    "@electron/fuses": "^1.8.0",
     "@electron/rebuild": "^3.7.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "@svgr/webpack": "^8.1.0",
@@ -138,7 +147,6 @@
     "css-minimizer-webpack-plugin": "^7.0.2",
     "detect-port": "^2.1.0",
     "electron": "^35.0.2",
-    "electron-builder": "^25.1.8",
     "electron-devtools-installer": "^4.0.0",
     "electronmon": "^2.0.3",
     "eslint": "^8.57.1",
@@ -199,6 +207,7 @@
           "x64"
         ]
       },
+      "icon": "assets/icons/icon.png",
       "type": "distribution",
       "hardenedRuntime": true,
       "entitlements": "assets/entitlements.mac.plist",
@@ -222,7 +231,8 @@
     "win": {
       "target": [
         "nsis"
-      ]
+      ],
+      "icon": "assets/icons/icon.png"
     },
     "linux": {
       "target": [
