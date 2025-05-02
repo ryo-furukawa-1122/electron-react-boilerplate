@@ -1,4 +1,6 @@
 body {
+  padding: 0;
+  margin: 0;
   position: relative;
   color: white;
   height: 100vh;
@@ -48,7 +50,10 @@ body {
   display: flex;
   justify-content: center;
   /* opacity: 0.95; */
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
+  flex-shrink: 0;
+  max-width: 560px;
+  margin: 0 auto 2rem auto;
 }
 
 .input-field input {
@@ -62,14 +67,16 @@ body {
   color: #000;
 }
 
-.container {
+.todo-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  max-width: 400px;
-  margin: auto;
+  max-width: 560px;
+  margin: 1rem auto;
   height: 100vh;
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 .todo-item {
@@ -79,6 +86,7 @@ body {
   background-color: #fff1;
   margin-bottom: 8px;
   list-style: none;
+  margin-top: 0;
 }
 
 .todo-item.dragging {
@@ -104,9 +112,10 @@ body {
 
 ul {
   padding: 0;
+  margin: 0;
 }
 
-li {
+.todo-list li {
   list-style: none;
 }
 
@@ -122,13 +131,6 @@ a:hover {
   text-decoration: none;
 }
 
-.Hello {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 24px 0;
-}
-
 .checked {
   text-decoration: line-through;
   opacity: 0.5;
@@ -140,3 +142,104 @@ a:hover {
   cursor: pointer;
   font-size: 24px;
 }
+
+.app-header {
+  display: flex;
+  position: sticky;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff1;
+  padding: 8px 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-title {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.app-icons {
+  display: flex;
+  align-items: center;
+}
+
+.app-icon {
+  cursor: pointer;
+  transition-duration: 0.1s;
+}
+
+app-icon:hover {
+  color: #7873f5;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+  opacity: 0;
+  animation: fadeIn 0.2s ease forwards;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  max-width: 560px;
+  height: 100%;
+  background-color: #fffe;
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  z-index: 100;
+  overflow-y: auto;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.drawer.open {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.drawer-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  float: right;
+}
+
+.drawer-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.drawer-list {
+  list-style: disc;
+  padding-left: 16px;
+  font-size: 16px;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-header {
+  flex-shrink: 0;
+}
+

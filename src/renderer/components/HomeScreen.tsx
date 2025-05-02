@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import TodoContent, { loadTodoList, storeTodoList } from './TodoContent';
 import { Todo } from '../types/types';
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
+import Header from './Header';
 
 const HomeScreen = () => {
   // Define the state
@@ -89,32 +90,35 @@ const HomeScreen = () => {
   }
 
   return (
-    <div className='container'>
-      
-      {/* <ul className="todo-list">
-        {todoList?.map((todo) => {
-          return <TodoContent key={todo.id} todo={todo} onCheck={onCheck} />;
-          })}
-          </ul> */}
+    <div className="app-container">
+      <Header />
+      <div className='todo-container'>
+        
+        {/* <ul className="todo-list">
+          {todoList?.map((todo) => {
+            return <TodoContent key={todo.id} todo={todo} onCheck={onCheck} />;
+            })}
+            </ul> */}
 
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="todoList">
-          {(provided) => (
-            <ul className="todo-list" {...provided.droppableProps} ref={provided.innerRef}>
-              {todoList.map((todo, index) => (
-                <Draggable key={todo.id.toString()} draggableId={todo.id.toString()} index={index}>
-                  {(provided, snapshot) => (
-                    <li ref={provided.innerRef} {...provided.draggableProps}  {...provided.dragHandleProps} className={`todo-item ${snapshot.isDragging ? 'draging' : ''}`}>
-                      <TodoContent todo={todo} onCheck={onCheck} onDelete={onDelete} />
-                    </li>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </ul>
-          )}
-        </Droppable>
-      </DragDropContext>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="todoList">
+            {(provided) => (
+              <ul className="todo-list" {...provided.droppableProps} ref={provided.innerRef}>
+                {todoList.map((todo, index) => (
+                  <Draggable key={todo.id.toString()} draggableId={todo.id.toString()} index={index}>
+                    {(provided, snapshot) => (
+                      <li ref={provided.innerRef} {...provided.draggableProps}  {...provided.dragHandleProps} className={`todo-item ${snapshot.isDragging ? 'draging' : ''}`}>
+                        <TodoContent todo={todo} onCheck={onCheck} onDelete={onDelete} />
+                      </li>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </ul>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </div>
       <div className="input-field">
         <input
           type='text'
