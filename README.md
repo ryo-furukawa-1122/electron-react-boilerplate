@@ -11,7 +11,7 @@ Create and manage your tasks with ease.
 
 # Installation
 ## macOS
-- Download `My TODO App-4.6.0.dmg` from the `installer` folder.
+- Download `My TODO App-4.6.0.dmg` from the `./release/installer` folder.
 - Open your `Downloads` folder and double-click the `.dmg` file to begin installation.
 
 ## Windows
