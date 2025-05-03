@@ -55,13 +55,22 @@ const Header = () => {
                             />
                         </button>
                         <h2 className='drawer-title'>Manual</h2>
+                        <p>
+                            Create and manage your tasks with ease.
+                        </p>
                         <ul className='drawer-list'>
-                            <li>Type your new task</li>
-                            <li>Click the add button or press the enter key</li>
-                            <li>Click the task to check it off</li>
-                            <li>Click the task to uncheck it</li>
-                            <li>You can delete the task by clicking the trash button</li>
-                            <li>You can reorder the tasks by dragging and dropping them</li>
+                            <li>
+                                <b>Add tasks</b>: Type a task and click the "Add" button or press "Enter". 
+                            </li>
+                            <li>
+                                <b>Reorder tasks</b>: Drag and drop tasks to prioritize them. 
+                            </li>
+                            <li>
+                                <b>Mark as complete</b>: Click the checkbox to mark a task as done. 
+                            </li>
+                            <li>
+                                <b>Delete tasks</b>: Click the trash icon to remove a task.
+                            </li>
                         </ul>
                     </div>
                 </>
