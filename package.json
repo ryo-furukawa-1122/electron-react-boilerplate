@@ -200,7 +200,9 @@
       "sign": ".erb/scripts/notarize.js",
       "notarize": false,
       "target": {
-        "target": "default",
+        "target": [
+          "dmg"
+        ],
         "arch": [
           "arm64",
           "x64"
